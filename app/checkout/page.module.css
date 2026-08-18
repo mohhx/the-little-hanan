@@ -1,0 +1,368 @@
+.page {
+  background: var(--brand-white);
+  padding-bottom: 80px;
+}
+
+.header {
+  padding: 48px 20px 32px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.title {
+  margin-top: 8px;
+}
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-top: 32px;
+}
+
+.formCol {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sectionTitle {
+  margin-top: 12px;
+}
+
+.sectionTitle:first-child {
+  margin-top: 0;
+}
+
+/* ── Fields ──────────────────────────────────────────────────────────────── */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fieldRow {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.field label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  background: var(--brand-white);
+  border: 1px solid var(--border);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--brand-rose);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A5248' stroke-width='1.5' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+}
+
+.error {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--brand-rose-dk);
+}
+
+/* ── Payment options ─────────────────────────────────────────────────────── */
+
+.paymentOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.paymentOption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.paymentOption input {
+  accent-color: var(--brand-rose);
+}
+
+.paymentOption i {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+
+.paymentOptionActive {
+  border-color: var(--brand-black);
+  color: var(--text-primary);
+  background: var(--brand-linen);
+}
+
+.paymentOptionActive i {
+  color: var(--brand-rose-dk);
+}
+
+.paymentOptionDisabled {
+  cursor: default;
+  opacity: 0.55;
+  position: relative;
+}
+
+.paymentOptionDisabled input {
+  cursor: default;
+}
+
+.comingSoonBadge {
+  margin-left: auto;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 3px 8px;
+}
+
+.paymentNote {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin: -4px 0 0;
+}
+
+/* ── Summary ─────────────────────────────────────────────────────────────── */
+
+.summaryCol {
+  width: 100%;
+}
+
+.summary {
+  background: var(--brand-linen);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.summaryTitle {
+  margin-bottom: 4px;
+}
+
+.summaryItems {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.summaryItem {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.summaryItemImg {
+  width: 48px;
+  height: 60px;
+  object-fit: cover;
+  background: var(--brand-greige);
+}
+
+.summaryItemInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.summaryItemName {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-primary);
+}
+
+.summaryItemMeta {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.summaryItemPrice {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+}
+
+.summaryRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.summaryNote {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin: -6px 0 0;
+}
+
+.summaryTotal {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.placeOrderBtn {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* ── Confirmation ────────────────────────────────────────────────────────── */
+
+.confirm {
+  text-align: center;
+  padding: 100px 20px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.confirmIcon {
+  font-size: 2.8rem;
+  color: var(--brand-sage);
+  margin-bottom: 4px;
+}
+
+.confirmTitle {
+  margin: 4px 0 8px;
+}
+
+.confirmText {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  max-width: 440px;
+  line-height: 1.6;
+}
+
+.confirmSummary {
+  width: 100%;
+  max-width: 420px;
+  background: var(--brand-linen);
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0 28px;
+  text-align: left;
+}
+
+.confirmRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.confirmRow span:last-child {
+  text-align: right;
+  color: var(--text-primary);
+}
+
+/* ── Empty state ─────────────────────────────────────────────────────────── */
+
+.empty {
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.emptyTitle {
+  margin-bottom: 8px;
+}
+
+.emptyText {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0 0 24px;
+}
+
+/* ── Desktop ─────────────────────────────────────────────────────────────── */
+
+@media (min-width: 640px) {
+  .header {
+    padding: 64px 32px 40px;
+  }
+
+  .fieldRow {
+    flex-direction: row;
+  }
+
+  .fieldRow .field {
+    flex: 1;
+  }
+}
+
+@media (min-width: 960px) {
+  .layout {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .formCol {
+    flex: 1;
+  }
+
+  .summaryCol {
+    width: 360px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 100px;
+  }
+}

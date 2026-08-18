@@ -1,0 +1,277 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  /* Soft permanent scrim behind the unscrolled state — the hero video
+     underneath can have dark/black content baked into its own footage
+     (not a bug in our CSS or the video path), and this nav sits fully
+     transparent over it by default, so a light gradient wash keeps a
+     readable backdrop regardless of what the video frame is showing at
+     any given scroll position. .scrolled below fully overrides this with
+     its own solid background once you scroll past the threshold. */
+  background: white;
+  transition: background 0.35s var(--eae-out), box-shadow 0.35s var(--ease-out);
+}
+
+.scrolled {
+  background: rgba(250, 250, 249, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 1px 0 var(--border-light);
+}
+
+.inner {
+  max-width: var(--max-w-md);
+  margin: 0 auto;
+  padding: 1.4rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+/* Links */
+.links {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.link {
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  position: relative;
+  transition: color 0.2s;
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--brand-rose);
+  transition: width 0.3s var(--ease-out);
+}
+
+.link:hover { color: var(--brand-rose); }
+.link:hover::after { width: 100%; }
+
+/* Logo */
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  color: var(--brand-black);
+  white-space: nowrap;
+}
+
+.dot { color: var(--brand-rose); }
+
+/* Icons */
+.icons {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.25rem;
+}
+
+.iconBtn {
+  position: relative;
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.iconBtn:hover { color: var(--brand-rose); }
+
+.cartBadge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--brand-rose);
+  color: white;
+  font-size: 9px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: var(--brand-black);
+  transition: all 0.3s;
+}
+
+/* ── Fullscreen menu ── */
+.mobileMenu {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-menu);
+  background: var(--brand-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-out);
+}
+
+.menuOpen {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Stagger children when open */
+.menuOpen .menuLink {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.closeBtn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.closeBtn:hover { color: var(--brand-rose); }
+
+.menuLogo {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  letter-spacing: -0.01em;
+  color: var(--text-muted);
+  margin-bottom: 2.5rem;
+}
+
+.menuLogo span { color: var(--brand-rose); }
+
+.menuLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  margin-bottom: 2.5rem;
+}
+
+.menuLink {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 8vw, 4rem);
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: -0.03em;
+  color: var(--brand-black);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: color 0.2s, opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+  line-height: 1.1;
+}
+
+.menuLink:hover { color: var(--brand-rose); }
+
+.menuWhimsy {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.menuWhimsy a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  transition: opacity 0.2s;
+}
+
+.menuWhimsy a:hover { opacity: 0.7; }
+
+.menuWhimsyTag {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.menuWhimsyName {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--whimsy-deep);
+}
+
+.menuWhimsyDesc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.menuIcons {
+  display: flex;
+  gap: 1.75rem;
+}
+
+.menuIcons a {
+  font-size: 1.4rem;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.menuIcons a:hover { color: var(--brand-black); }
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .links { display: none; }
+  .hamburger { display: flex; }
+}
+
+/* ── Entrance state ──
+   Hidden by default so the GSAP timeline in Navbar.js has something to
+   animate from. Gated behind no-preference so JS failures or
+   prefers-reduced-motion never leave the nav stuck invisible. */
+@media (prefers-reduced-motion: no-preference) {
+  .logo,
+  .link,
+  .iconBtn,
+  .hamburger {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}

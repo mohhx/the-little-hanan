@@ -1,0 +1,142 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.headerRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: var(--brand-black);
+  margin: 0;
+}
+
+.clearAll {
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--brand-rose);
+  cursor: pointer;
+  padding: 0;
+}
+
+.clearAll:hover {
+  text-decoration: underline;
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.groupTitle {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.checkList,
+.radioList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.checkboxLabel,
+.radioLabel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--brand-black);
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkboxLabel input,
+.radioLabel input {
+  position: absolute;
+  opacity: 0;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.checkboxCustom {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--brand-black);
+  flex-shrink: 0;
+  transition: background 0.15s var(--ease-out), border-color 0.15s var(--ease-out);
+}
+
+.checkboxLabel input:checked + .checkboxCustom {
+  background: var(--brand-rose);
+  border-color: var(--brand-rose);
+}
+
+.checkboxLabel input:checked + .checkboxCustom::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 5px;
+  height: 9px;
+  border: solid var(--brand-white);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.radioCustom {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--brand-black);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: border-color 0.15s var(--ease-out);
+}
+
+.radioLabel input:checked + .radioCustom {
+  border-color: var(--brand-rose);
+}
+
+.radioLabel input:checked + .radioCustom::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand-rose);
+}
+
+.checkboxLabel:hover .checkboxCustom,
+.radioLabel:hover .radioCustom {
+  border-color: var(--brand-rose);
+}

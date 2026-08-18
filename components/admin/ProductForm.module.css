@@ -1,0 +1,216 @@
+.form {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.error {
+  font-family: var(--font-body);
+  color: #B8394A;
+  background: #FBEAEA;
+  border: 1px solid #F0C6C6;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin: 0;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+}
+
+.input,
+.textarea {
+  font-family: var(--font-body);
+  font-size: 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 12px;
+  background: var(--brand-white);
+  color: var(--text-primary);
+  width: 100%;
+}
+
+.input {
+  height: 38px;
+}
+
+.textarea {
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.addCategoryLink {
+  align-self: flex-start;
+  margin-top: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--brand-rose);
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.addCategoryRow {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.addCategoryInput {
+  flex: 1;
+  font-family: var(--font-body);
+  font-size: 13px;
+  height: 34px;
+  border: 1px solid var(--brand-rose);
+  border-radius: 8px;
+  padding: 0 10px;
+  background: var(--whimsy-light);
+}
+
+.addCategoryBtn {
+  font-family: var(--font-body);
+  font-size: 13px;
+  height: 34px;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: none;
+  background: var(--brand-rose);
+  color: var(--brand-white);
+}
+
+.pillRow {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--brand-white);
+  color: var(--text-secondary);
+}
+
+.pillActive {
+  border-color: var(--brand-rose);
+  background: var(--brand-linen);
+  color: var(--text-primary);
+}
+
+.imageRow {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.imageThumb {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--brand-greige);
+  cursor: grab;
+}
+
+.imageThumbImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.coverBadge {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  font-family: var(--font-body);
+  font-size: 10px;
+  background: var(--brand-rose);
+  color: var(--brand-white);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+.imageRemoveBtn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: none;
+  background: var(--brand-white);
+  color: var(--brand-black);
+  font-size: 12px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.imageAddBtn {
+  width: 88px;
+  height: 88px;
+  border-radius: 10px;
+  border: 1.5px dashed var(--text-muted);
+  background: none;
+  color: var(--text-muted);
+  font-size: 22px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.saveBtn {
+  font-family: var(--font-body);
+  font-size: 14px;
+  height: 42px;
+  padding: 0 24px;
+  border-radius: 24px;
+  border: none;
+  background: var(--brand-black);
+  color: var(--brand-white);
+}
+
+.saveBtn:disabled {
+  opacity: 0.6;
+}
+
+.cancelBtn {
+  font-family: var(--font-body);
+  font-size: 14px;
+  height: 42px;
+  padding: 0 24px;
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  background: var(--brand-white);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 560px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+}

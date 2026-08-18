@@ -1,0 +1,133 @@
+.page {
+  background: var(--brand-white);
+}
+
+/* ── Hero ── */
+.hero {
+  padding: 5rem 0 4rem;
+  text-align: center;
+}
+
+.heroTitle {
+  color: var(--brand-black);
+  margin-bottom: 1.5rem;
+}
+
+.heroSub {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* ── Story ── */
+.storySection {
+  background: var(--brand-linen);
+}
+
+.storyGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.storyImgWrap {
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.storyImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.storyHeading {
+  color: var(--brand-black);
+  margin-bottom: 1.25rem;
+}
+
+/* ── Values ── */
+.valuesHeading {
+  text-align: center;
+  color: var(--brand-black);
+  margin-bottom: 3rem;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.valueCard {
+  text-align: center;
+  padding: 2.5rem 1.75rem;
+  border: 1px solid var(--border-light);
+}
+
+.valueIcon {
+  font-size: 1.8rem;
+  color: var(--brand-rose);
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.valueTitle {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--brand-black);
+  margin-bottom: 0.75rem;
+}
+
+/* ── CTA ── */
+.ctaSection {
+  background: var(--brand-black);
+  padding: 5rem 0;
+  text-align: center;
+}
+
+.ctaHeading {
+  color: var(--brand-white);
+  margin-bottom: 2rem;
+}
+
+.ctaButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.ctaButtons .btn-outline {
+  color: var(--brand-white);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.ctaButtons .btn-outline:hover {
+  background: var(--brand-white);
+  color: var(--brand-black);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .storyGrid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .valuesGrid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .ctaButtons a {
+    width: 100%;
+    max-width: 280px;
+  }
+}

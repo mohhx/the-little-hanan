@@ -1,0 +1,60 @@
+.card {
+  background: var(--brand-linen);
+  border: 1px solid var(--border);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+}
+
+.label {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.value {
+  color: var(--text-primary);
+  font-weight: 500;
+  text-align: right;
+}
+
+.valueRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.copyBtn {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--brand-rose-dk);
+  background: none;
+  border: 1px solid var(--brand-rose);
+  padding: 3px 9px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.copyBtn:hover {
+  background: var(--brand-rose);
+  color: var(--brand-white);
+}
+
+.loading {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0;
+}

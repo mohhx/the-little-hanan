@@ -1,0 +1,245 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@400;500&display=swap");
+
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS — The Little Hanan
+═══════════════════════════════════════════ */
+:root {
+  /* Brand — Main */
+  --brand-black:   #1A1A1A;
+  --brand-rose:    #D4789A;
+  --brand-rose-dk: #B8567A;
+  --brand-rose-lt: #F5D5E4;
+  --brand-linen:   #F5E8E4;
+  --brand-sage:    #7A9E8A;
+  --brand-sage-lt: #C8DDD2;
+  --brand-greige:  #E8E0D8;
+  --brand-white:   #FAFAF9;
+
+  /* Brand — WhimsyNetting */
+  --whimsy-deep:   #E8698A;
+  --whimsy-mid:    #F4B8CC;
+  --whimsy-light:  #FBF0F4;
+  --whimsy-text:   #7A3050;
+
+  /* Text */
+  --text-primary:   #1A1A1A;
+  --text-secondary: #5A5248;
+  --text-muted:     #9A928A;
+
+  /* Borders */
+  --border:         #E0D8D0;
+  --border-light:   #EDE8E4;
+
+  /* Fonts */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+
+  /* Spacing */
+  --max-w:     1400px;
+  --max-w-md:  1200px;
+  --max-w-sm:  900px;
+
+  /* Motion */
+  --ease-out:  cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in:   cubic-bezier(0.64, 0, 0.78, 0);
+
+  /* Z-index */
+  --z-nav:     100;
+  --z-menu:    200;
+  --z-cart:    300;
+  --z-modal:   400;
+}
+
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text-primary);
+  background: var(--brand-white);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, video { width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+button { font-family: var(--font-body); cursor: pointer; }
+ul, ol { list-style: none; }
+
+/* ═══════════════════════════════════════════
+   TYPOGRAPHY
+═══════════════════════════════════════════ */
+.display-xl {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 7vw, 6.5rem);
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  text-wrap: balance;
+}
+
+.display-lg {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.display-md {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.body-lg { font-size: 1.05rem; line-height: 1.7; color: var(--text-secondary); }
+.body-sm { font-size: 0.875rem; line-height: 1.6; color: var(--text-secondary); }
+
+/* ═══════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════ */
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.container--md { max-width: var(--max-w-md); }
+.container--sm { max-width: var(--max-w-sm); }
+
+.section { padding: 5rem 0; }
+.section--sm { padding: 3rem 0; }
+.section--lg { padding: 7rem 0; }
+
+/* ═══════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.8rem 2rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+  border-radius: 0;
+  transition: all 0.3s var(--ease-out);
+  white-space: nowrap;
+}
+
+/* Primary — dark */
+.btn-primary {
+  background: var(--brand-black);
+  color: var(--brand-white);
+  border-color: var(--brand-black);
+}
+.btn-primary:hover {
+  background: var(--brand-rose);
+  border-color: var(--brand-rose);
+}
+
+/* Secondary — outlined */
+.btn-outline {
+  background: transparent;
+  color: var(--brand-black);
+  border-color: var(--brand-black);
+}
+.btn-outline:hover {
+  background: var(--brand-black);
+  color: var(--brand-white);
+}
+
+/* Rose */
+.btn-rose {
+  background: var(--brand-rose);
+  color: var(--brand-white);
+  border-color: var(--brand-rose);
+}
+.btn-rose:hover {
+  background: var(--brand-rose-dk);
+  border-color: var(--brand-rose-dk);
+}
+
+/* Ghost — subtle */
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: var(--border);
+}
+.btn-ghost:hover {
+  color: var(--brand-black);
+  border-color: var(--brand-black);
+}
+
+/* ═══════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+[data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+}
+
+/* ═══════════════════════════════════════════
+   DIVIDER
+═══════════════════════════════════════════ */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border-light);
+}
+
+/* ═══════════════════════════════════════════
+   WHIMSYNETTING ACCENT
+═══════════════════════════════════════════ */
+.whimsy-accent { color: var(--whimsy-deep); }
+.whimsy-bg     { background: var(--whimsy-light); }
+
+/* ═══════════════════════════════════════════
+   MOBILE UTILS
+═══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  .section { padding: 3.5rem 0; }
+  .hide-mobile { display: none !important; }
+}
+
+@media (min-width: 769px) {
+  .hide-desktop { display: none !important; }
+}

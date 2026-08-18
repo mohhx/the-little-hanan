@@ -1,0 +1,660 @@
+.section {
+  background: var(--brand-linen);
+  /* Deliberately NOT overflow:hidden here — an ancestor with overflow
+     other than visible breaks position:sticky on .copyWrapPin /
+     .reelWindow below. Clipping is instead scoped narrowly to those
+     elements themselves and to .simpleTrackWrap, which are siblings of
+     each other, not ancestors. */
+  padding: 5rem 0;
+}
+
+/* ── Layout wrapper ──
+   Mobile-first base: normal stacked flow, used as-is whenever hasReel is
+   false (too few real deals — see the JS threshold). When hasReel is
+   true, .layoutReel is added on top and only takes effect at desktop
+   widths with motion allowed — below that breakpoint it's inert and the
+   base stacked rules apply instead, so no separate "mobile" JSX branch
+   is needed. */
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .layoutReel {
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 3rem;
+    /* Flat scroll runway — not scaled by frame count. A per-frame
+       formula here previously ballooned past 200vh on a 7-frame reel;
+       keep this flat regardless of how many deals are in the reel. */
+    height: calc(94vh + 40vh);
+    height: calc(94svh + 40svh);
+  }
+}
+
+/* ── Copy column — holds the marquee underlay + the actual copy content
+   stacked above it. Single mounted instance, repositioned by CSS rather
+   than duplicated in the DOM, so it works unchanged across the empty
+   state / simple fallback / sticky desktop layouts. ── */
+.copyWrap {
+  position: relative;
+  overflow: hidden;
+  max-width: 440px;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .copyWrapPin {
+    position: sticky;
+    /* Matches the sticky navbar's rendered height with a little
+       breathing room — no --nav-height custom property exists yet in
+       globals.css, so this is a maintained estimate, not a measured
+       value. */
+    top: 96px;
+    height: 94vh;
+    height: 94svh;
+    max-width: 440px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+/* Mobile/tablet: the copy band and the reel/fallback row below it share
+   the exact same background already — what was actually reading as "two
+   things" was a shape mismatch (this band inset and width-capped, the
+   row below it bleeding edge-to-edge) plus a visible gap between them.
+   Removing both makes it read as one continuous stage instead of two
+   stacked components. */
+@media (max-width: 1023px) {
+  .layoutReel {
+    gap: 0;
+  }
+
+  .copyWrapPin {
+    max-width: none;
+    margin: 0 -1.5rem;
+    padding: 1.25rem 1.5rem 1rem;
+  }
+
+  /* Countdown + CTA share one row instead of stacking — grid placement
+     here is independent of DOM order, so this is pure repositioning,
+     nothing moved in the markup. */
+  .copyWrapPin .copyContent {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 0.75rem;
+    align-items: center;
+  }
+
+  .copyWrapPin .eyebrow,
+  .copyWrapPin .heading {
+    grid-column: 1 / -1;
+  }
+
+  .copyWrapPin .desc {
+    display: none;
+  }
+
+  .copyWrapPin .countdownRow {
+    grid-column: 1;
+    margin-bottom: 0;
+  }
+
+  .copyWrapPin .cta {
+    grid-column: 2;
+    justify-self: end;
+  }
+
+  .copyWrapPin .heading {
+    margin-bottom: 0.6rem;
+  }
+
+  .copyWrapPin .marqueeWord {
+    font-size: clamp(1.6rem, 7vw, 2.6rem);
+    opacity: 0.06;
+  }
+}
+
+/* Scrolling text band behind the copy — same technique as Hero.js's own
+   marquee (duplicated content, linear infinite translateX loop), just
+   used here as a quiet background layer instead of a standalone strip.
+   Sized and weighted to read clearly as bold background texture without
+   competing with the actual copy sitting above it. */
+.marqueeUnderlay {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  transform: translateY(-50%);
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.marqueeTrack {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: dealsMarquee 26s linear infinite;
+}
+
+.marqueeWord {
+  font-family: var(--font-body);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  font-size: clamp(2.6rem, 9.5vw, 4.6rem);
+  color: var(--brand-black);
+  opacity: 0.09;
+  -webkit-text-stroke: 1px rgba(26, 26, 26, 0.15);
+  padding: 0 1.5rem;
+  white-space: nowrap;
+}
+
+@keyframes dealsMarquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-33.333%); }
+}
+
+.copyContent {
+  position: relative;
+  z-index: 1;
+}
+
+.eyebrow {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--brand-black);
+  color: white !important;
+  padding: 0.45rem 0.9rem 0.45rem 0.75rem;
+  font-size: 0.68rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.1em !important;
+  margin-bottom: 1.4rem;
+}
+
+.eyebrowDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-rose);
+  flex-shrink: 0;
+}
+
+@keyframes dealsEyebrowPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .eyebrowDot {
+    animation: dealsEyebrowPulse 1.8s ease-in-out infinite;
+  }
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.6vw, 4rem);
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: -0.03em;
+  color: var(--brand-black);
+  line-height: 0.98;
+  margin-bottom: 1.1rem;
+}
+
+/* Masked line-reveal — identical technique to WhimsyTeaser's heading:
+   .headingLine clips (overflow: hidden), .headingLineInner is the piece
+   GSAP actually animates (yPercent 105 -> 0), so each line rises up from
+   behind its own mask instead of the whole heading fading as one lump. */
+.headingLine {
+  display: block;
+  overflow: hidden;
+}
+
+.headingLineInner {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* Same gold/rose shimmer loop as WhimsyTeaser's "couture." — applied here
+   to the trailing word "Month" so the heading keeps a living, premium
+   accent after the entrance finishes, instead of sitting fully static. */
+@keyframes dealsShimmer {
+  0%, 40% { background-position: 200% 0; }
+  70% { background-position: -100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+.heading em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--brand-rose);
+  background-image: linear-gradient(
+    100deg,
+    var(--brand-rose) 30%,
+    #f0d9a0 48%,
+    #e8c87a 52%,
+    var(--brand-rose) 70%
+  );
+  background-size: 250% 100%;
+  background-position: 200% 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: dealsShimmer 4.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heading em {
+    animation: none;
+    background-position: -100% 0;
+  }
+}
+
+.desc {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+/* Styling comes entirely from the shared .btn.btn-primary classes — this
+   local class exists only as a scoped hook for the entrance timeline. */
+.cta {
+  display: inline-block;
+}
+
+/* ── Kinetic-typography countdown — no boxes, no pills. The numerals
+   are large enough to function as a piece of the layout in their own
+   right (bold sans, contrasting with the italic serif heading above
+   them), separated by a thin rose slash instead of a container. ── */
+.countdownRow {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: clamp(0.5rem, 1.6vw, 1rem);
+  margin-bottom: 2.75rem;
+}
+
+.countUnit {
+  display: flex;
+  flex-direction: column;
+}
+
+.countNum {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 4.6vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--brand-black);
+  font-variant-numeric: tabular-nums;
+  display: inline-block;
+}
+
+.countLabel {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 0.4rem;
+}
+
+.countSlash {
+  align-self: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  color: var(--brand-rose);
+  opacity: 0.7;
+  padding-bottom: 0.3rem;
+}
+
+@media (max-width: 1023px) {
+  .countdownRow { gap: 0.4rem; }
+  .countNum { font-size: clamp(1.4rem, 5vw, 2.6rem); }
+  .countLabel { font-size: 0.56rem; margin-top: 0.2rem; }
+  .countSlash { font-size: 1.1rem; padding-bottom: 0.15rem; }
+}
+
+/* ── Desktop crossfade slideshow — hidden by default, shown only at the
+   same breakpoint .layoutReel activates at. No stage background — the
+   product frame floats directly on the section's own linen background,
+   echoing an editorial lookbook spread rather than a boxed gallery. ── */
+.reelWindow {
+  display: none;
+}
+
+/* Desktop: pinned via plain CSS position:sticky within the split grid. */
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .reelWindow {
+    display: block;
+    position: sticky;
+    /* Same offset as .copyWrapPin — both columns must pin at the same
+       viewport position for the whole scroll runway. */
+    top: 96px;
+    overflow: hidden;
+    height: 94vh;
+    height: 94svh;
+  }
+}
+
+/* Mobile/tablet: same crossfade stage as desktop, but pinned via GSAP
+   ScrollTrigger instead (see DealsSection.js) — there's no side-by-side
+   column to pin against here, so the window pins itself for a scroll
+   distance sized in JS. Shorter than desktop's 94vh, which would
+   dominate a phone screen, and bled edge-to-edge past the container's
+   padding so it reads as a real stage rather than an inset box. */
+@media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
+  .reelWindow {
+    display: block;
+    overflow: hidden;
+    height: 70vh;
+    height: 70svh;
+    margin: 0 -1.5rem;
+  }
+}
+
+/* Small "01 / 06" wayfinding readout, top-right of the stage — a quiet
+   editorial detail that also makes the slideshow's progress legible. */
+.reelCounter {
+  position: absolute;
+  top: 1.75rem;
+  right: 1.75rem;
+  z-index: 3;
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--brand-black);
+  letter-spacing: 0.02em;
+}
+
+.reelCounterTotal {
+  font-weight: 500;
+  color: rgba(26, 26, 26, 0.4);
+  font-size: 0.8rem;
+}
+
+.reelProgressTrack {
+  position: absolute;
+  top: 3.1rem;
+  right: 1.75rem;
+  z-index: 3;
+  width: 64px;
+  height: 2px;
+  background: rgba(26, 26, 26, 0.15);
+}
+
+.reelProgressFill {
+  height: 100%;
+  width: 0%;
+  background: var(--brand-rose);
+}
+
+/* First-frame-only hint, fades out over the first ~8% of scroll progress
+   (see the onUpdate handler in DealsSection.js) rather than on a timer,
+   so it disappears exactly when the user starts actually scrolling
+   through the reel. pointer-events: none so it never blocks the card
+   underneath it. */
+.reelHint {
+  position: absolute;
+  bottom: 1.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(26, 26, 26, 0.85);
+  color: var(--brand-white);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  padding: 0.5rem 0.9rem;
+  pointer-events: none;
+}
+
+.track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.frame {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.frameVisual {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+}
+
+/* Giant faint background numeral — same technique as the Hero section's
+   .bgMark watermark, reused here for brand consistency. Fades and scales
+   together with the rest of its frame (see .frameVisual), part of the
+   same crossfade rather than animated independently. */
+.frameIndex {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(8rem, 17vw, 13rem);
+  color: var(--brand-black);
+  opacity: 0.05;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Sizing/centering wrapper around the product card — solid white "mat"
+   floating on the bare linen stage, softened for a light background
+   (a harder shadow reads better popping off a dark stage, this is
+   tuned for the linen underneath instead). */
+.frameCard {
+  position: relative;
+  z-index: 1;
+  width: min(300px, 72%);
+  background: var(--brand-white);
+  padding: 14px 14px 6px;
+  box-shadow: 0 30px 60px rgba(26, 20, 17, 0.18);
+}
+
+/* The 300px cap above wins on every screen past ~416px, so on tablet
+   widths the card was stuck at phone-size with large empty gutters on
+   either side. This lets it actually grow to use the available width. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .frameCard {
+    width: min(420px, 82%);
+  }
+}
+
+/* Deals-reel-only price callout, stacked directly below the discount
+   badge (same left inset) rather than the right edge or bottom — both
+   already busy with ProductCard's own wishlist/quick-view buttons and
+   the full-width quick-add bar. Not part of ProductCard itself; this is
+   a Deals-specific treatment layered on top of it. */
+.framePriceTag {
+  position: absolute;
+  top: 54px;
+  left: 26px;
+  z-index: 2;
+  background: var(--brand-black);
+  color: var(--brand-white);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  letter-spacing: 0.02em;
+}
+
+.frameShopAll {
+  text-align: center;
+  cursor: pointer;
+}
+
+.shopAllInner {
+  position: relative;
+  z-index: 1;
+  width: min(380px, 78%);
+  color: var(--brand-black);
+  padding: 3rem 1.5rem;
+  background: rgba(26, 26, 26, 0.04);
+  border: 1px solid rgba(26, 26, 26, 0.16);
+  transition: background 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+}
+
+.frameShopAll:hover .shopAllInner {
+  background: rgba(212, 120, 154, 0.18);
+  border-color: rgba(212, 120, 154, 0.5);
+}
+.frameShopAll .frameIndex { opacity: 0.07; }
+
+.shopAllHeading {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  margin-bottom: 1.25rem;
+}
+
+.shopAllArrow {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(26, 26, 26, 0.3);
+  display: grid;
+  place-content: center;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  transition: background 0.25s var(--ease-out), border-color 0.25s var(--ease-out), color 0.25s var(--ease-out);
+}
+
+.frameShopAll:hover .shopAllArrow {
+  background: var(--brand-black);
+  color: var(--brand-white);
+  border-color: var(--brand-black);
+}
+
+/* ── Simple horizontal-row fallback — used when there's too little real
+   inventory for the reel to feel worthwhile (hasReel false), and as the
+   reduced-motion fallback whenever hasReel is true (hidden via
+   .simpleTrackWrapHideOnPin otherwise — see that rule below). Same
+   light linen/white-mat treatment as the reel itself, for visual
+   consistency between the two. ── */
+.simpleTrackWrap {
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  background: var(--brand-linen);
+  border-top: 1px solid rgba(26, 26, 26, 0.08);
+  border-bottom: 1px solid rgba(26, 26, 26, 0.08);
+  padding: 2.5rem 1.25rem;
+}
+
+.simpleTrackWrap::-webkit-scrollbar { display: none; }
+
+@media (max-width: 1023px) {
+  /* Bleed edge-to-edge past the container's own horizontal padding
+     (1.5rem, from globals.css .container), instead of sitting as an
+     inset box within it. */
+  .simpleTrackWrap { margin: 0 -1.5rem; }
+}
+
+/* Hides the fallback row whenever the reel is actually active — which is
+   now every width, not just desktop, since the reel itself is no longer
+   width-gated. Scoped to motion preference only: reduced-motion users
+   never get the reel (see .reelWindow's own media queries), so this
+   fallback stays visible for them regardless of screen width — it's
+   their only working version of this section. */
+@media (prefers-reduced-motion: no-preference) {
+  .simpleTrackWrapHideOnPin { display: none; }
+}
+
+.simpleTrack {
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+  padding: 0 0.25rem;
+  margin: 0 auto;
+}
+
+.simpleSlide {
+  width: 240px;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+/* Solid white "mat" behind the product photo — same treatment as
+   .frameCard, sized down for the fallback row. */
+.simpleCard {
+  height: 100%;
+  background: var(--brand-white);
+  padding: 10px 10px 4px;
+  box-shadow: 0 14px 36px rgba(26, 20, 17, 0.18);
+}
+
+.simpleMoreTile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  color: var(--brand-black);
+  text-align: center;
+  background: rgba(26, 26, 26, 0.04);
+  border: 1px solid rgba(26, 26, 26, 0.16);
+  transition: background 0.25s var(--ease-out), border-color 0.25s var(--ease-out);
+}
+
+.simpleMoreTile:hover {
+  background: rgba(212, 120, 154, 0.18);
+  border-color: rgba(212, 120, 154, 0.5);
+}
+
+.moreLabel {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+}
+
+.emptyState {
+  background: white;
+  border: 1px solid var(--border-light);
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+
+.emptyState p {
+  color: var(--text-secondary);
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 560px) {
+  .countUnit { min-width: 40px; }
+  .simpleMoreTile { min-height: 280px; }
+}

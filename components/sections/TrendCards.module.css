@@ -1,0 +1,608 @@
+/* Shared 3-column grid used by TrustBanner and BlogSection. Both previously
+   hardcoded `gridTemplateColumns: 'repeat(3, 1fr)'` as an inline style with
+   no responsive handling at all, which crushed all 3 cards into narrow
+   columns on every phone width. */
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+/* ═══════════════════════════════════════════
+   TRUST BANNER — EDITORIAL EXPERIENCE
+   ═══════════════════════════════════════════ */
+
+.trustSection {
+  position: relative;
+  overflow: hidden;
+  padding: 5.25rem 0 5.5rem;
+  background: var(--brand-greige);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+/* ───────────── Header ───────────── */
+
+.trustHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3.75rem;
+  text-align: center;
+}
+
+.trustEyebrow {
+  margin: 0;
+  color: var(--brand-rose);
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.trustOrnament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-top: 1rem;
+}
+
+.trustOrnament span {
+  display: block;
+  width: 2.6rem;
+  height: 1px;
+  background: var(--brand-rose);
+  opacity: 0.35;
+}
+
+.trustOrnament i {
+  color: var(--brand-rose);
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-style: normal;
+  line-height: 1;
+  opacity: 0.8;
+}
+
+/* ───────────── Desktop Grid ───────────── */
+
+.trustGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.trustItem {
+  position: relative;
+  min-width: 0;
+  padding: 0 2.75rem;
+  transition:
+    transform 0.45s var(--ease-out),
+    filter 0.45s var(--ease-out);
+}
+
+.trustItem:first-child {
+  padding-left: 0;
+}
+
+.trustItem:last-child {
+  padding-right: 0;
+}
+
+.trustItem:hover {
+  transform: translateY(-4px);
+}
+
+/* ───────────── Dividers ───────────── */
+
+.trustItemWithDivider::after {
+  content: '';
+  position: absolute;
+  top: 0.25rem;
+  right: 0;
+  width: 1px;
+  height: calc(100% - 0.5rem);
+  background: var(--border);
+  opacity: 0.8;
+}
+
+/* ───────────── Number ───────────── */
+
+.trustNumber {
+  margin-bottom: 1.35rem;
+  color: var(--brand-rose);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+/* ───────────── Content ───────────── */
+
+.trustContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+}
+
+.trustIcon {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--brand-linen);
+  color: var(--brand-rose);
+  font-size: 1.25rem;
+  box-shadow: 0 8px 24px rgba(40, 25, 25, 0.035);
+  transition:
+    transform 0.45s var(--ease-out),
+    box-shadow 0.45s var(--ease-out),
+    background 0.45s var(--ease-out);
+}
+
+.trustItem:hover .trustIcon {
+  transform: translateY(-2px);
+  background: var(--brand-white);
+  box-shadow: 0 10px 28px rgba(40, 25, 25, 0.07);
+}
+
+.trustCopy {
+  min-width: 0;
+  padding-top: 0.1rem;
+}
+
+.trustCopy h3 {
+  margin: 0;
+  color: var(--brand-black);
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 1.8vw, 1.65rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.trustAccent {
+  display: block;
+  width: 2.15rem;
+  height: 1px;
+  margin: 0.8rem 0 0.85rem;
+  background: var(--brand-rose);
+  opacity: 0.7;
+  transition:
+    width 0.45s var(--ease-out),
+    opacity 0.45s var(--ease-out);
+}
+
+.trustItem:hover .trustAccent {
+  width: 3rem;
+  opacity: 1;
+}
+
+.trustCopy p {
+  max-width: 260px;
+  margin: 0;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  line-height: 1.7;
+}
+
+/* ═══════════════════════════════════════════
+   TABLET
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .trustSection {
+    padding: 4.5rem 0 4.75rem;
+  }
+
+  .trustHeader {
+    margin-bottom: 3.25rem;
+  }
+
+  .trustItem {
+    padding: 0 1.5rem;
+  }
+
+  .trustContent {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .trustCopy h3 {
+    font-size: 1.3rem;
+  }
+
+  .trustCopy p {
+    max-width: 220px;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   MOBILE
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  .trustSection {
+    padding: 4rem 0 4.25rem;
+  }
+
+  .trustHeader {
+    margin-bottom: 2.75rem;
+  }
+
+  .trustEyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.24em;
+  }
+
+  .trustOrnament {
+    margin-top: 0.85rem;
+  }
+
+  .trustOrnament span {
+    width: 2rem;
+  }
+
+  .trustGrid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .trustItem,
+  .trustItem:first-child,
+  .trustItem:last-child {
+    padding: 0 0 1.85rem;
+  }
+
+  .trustItem + .trustItem {
+    padding-top: 1.85rem;
+  }
+
+  .trustItemWithDivider::after {
+    top: auto;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .trustNumber {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .trustContent {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .trustIcon {
+    width: 46px;
+    height: 46px;
+    font-size: 1.1rem;
+  }
+
+  .trustCopy {
+    padding-top: 0.05rem;
+  }
+
+  .trustCopy h3 {
+    font-size: 1.3rem;
+  }
+
+  .trustAccent {
+    margin-top: 0.65rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .trustCopy p {
+    max-width: none;
+    font-size: 0.82rem;
+    line-height: 1.65;
+  }
+
+  /* Disable hover movement on touch-sized layouts. */
+  .trustItem:hover {
+    transform: none;
+  }
+}
+/* ═══════════════════════════════════════════
+   TRUST BANNER — SUBTLE LIFE & MICRO-INTERACTIONS
+   ═══════════════════════════════════════════ */
+
+.trustHeader {
+  position: relative;
+}
+
+/* Soft ambient shapes behind the heading */
+.trustAmbient {
+  position: absolute;
+  inset: -4rem 10% auto;
+  height: 9rem;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.45;
+}
+
+.trustAmbient span {
+  position: absolute;
+  display: block;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  filter: blur(42px);
+  background: var(--brand-rose);
+  opacity: 0.08;
+  animation: trustFloat 9s ease-in-out infinite;
+}
+
+.trustAmbient span:first-child {
+  left: 15%;
+  top: 1rem;
+}
+
+.trustAmbient span:last-child {
+  right: 15%;
+  top: -1rem;
+  width: 6rem;
+  height: 6rem;
+  animation-delay: -4.5s;
+}
+
+@keyframes trustFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(0, -8px, 0) scale(1.06);
+  }
+}
+
+/* Living ornament */
+.trustOrnament {
+  position: relative;
+}
+
+.trustOrnament i {
+  display: block;
+  animation: trustStarPulse 8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.trustOrnament span {
+  transform-origin: center;
+  transition:
+    width 0.6s var(--ease-out),
+    opacity 0.6s var(--ease-out);
+}
+
+@keyframes trustStarPulse {
+  0%,
+  100% {
+    transform: rotate(0deg) scale(1);
+    opacity: 0.7;
+  }
+
+  50% {
+    transform: rotate(90deg) scale(1.12);
+    opacity: 1;
+  }
+}
+
+/* Make the entire benefit feel tactile */
+.trustItem {
+  cursor: default;
+}
+
+.trustItem::before {
+  content: '';
+  position: absolute;
+  inset: -1rem;
+  border-radius: 2px;
+  background: radial-gradient(
+    circle at 50% 35%,
+    rgba(255, 255, 255, 0.28),
+    transparent 65%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.55s var(--ease-out);
+}
+
+.trustItem:hover::before {
+  opacity: 1;
+}
+
+/* Number reacts with the item */
+.trustNumber {
+  transition:
+    color 0.4s var(--ease-out),
+    transform 0.4s var(--ease-out),
+    letter-spacing 0.4s var(--ease-out);
+}
+
+.trustItem:hover .trustNumber {
+  color: var(--brand-rose);
+  transform: translateX(3px);
+  letter-spacing: 0.04em;
+}
+
+/* More tactile icon */
+.trustIcon {
+  position: relative;
+  isolation: isolate;
+}
+
+.trustIcon::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border: 1px solid var(--brand-rose);
+  border-radius: 50%;
+  opacity: 0;
+  transform: scale(0.7);
+  transition:
+    opacity 0.45s var(--ease-out),
+    transform 0.55s var(--ease-out);
+  z-index: -1;
+}
+
+.trustItem:hover .trustIcon::before {
+  opacity: 0.28;
+  transform: scale(1);
+}
+
+.trustItem:hover .trustIcon {
+  transform: translateY(-3px) rotate(3deg);
+}
+
+/* Heading gently follows the interaction */
+.trustCopy h3 {
+  transition:
+    transform 0.45s var(--ease-out),
+    color 0.45s var(--ease-out);
+}
+
+.trustItem:hover .trustCopy h3 {
+  transform: translateX(2px);
+}
+
+/* Description subtly becomes more present */
+.trustCopy p {
+  transition:
+    color 0.45s var(--ease-out),
+    opacity 0.45s var(--ease-out);
+}
+
+.trustItem:hover .trustCopy p {
+  color: var(--brand-black);
+}
+
+/* Accent line already grows — make it slightly more fluid */
+.trustAccent {
+  transform-origin: left center;
+}
+
+/* Desktop divider gets a subtle reveal */
+.trustItemWithDivider::after {
+  transition:
+    opacity 0.5s var(--ease-out),
+    transform 0.6s var(--ease-out);
+  transform-origin: top;
+}
+
+.trustItem:hover + .trustItem::after,
+.trustItemWithDivider:hover::after {
+  opacity: 0.45;
+}
+
+/* ═══════════════════════════════════════════
+   TOUCH / REDUCED MOTION
+   ═══════════════════════════════════════════ */
+
+@media (hover: none) {
+  .trustItem:hover {
+    transform: none;
+  }
+
+  .trustItem:hover::before {
+    opacity: 0;
+  }
+
+  .trustItem:hover .trustIcon {
+    transform: none;
+  }
+
+  .trustItem:hover .trustIcon::before {
+    opacity: 0;
+  }
+
+  .trustItem:hover .trustCopy h3 {
+    transform: none;
+  }
+
+  .trustItem:hover .trustNumber {
+    transform: none;
+    letter-spacing: normal;
+  }
+
+  .trustItem:hover .trustCopy p {
+    color: var(--text-secondary);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trustAmbient span,
+  .trustOrnament i {
+    animation: none;
+  }
+
+  .trustItem,
+  .trustIcon,
+  .trustIcon::before,
+  .trustCopy h3,
+  .trustNumber,
+  .trustAccent,
+  .trustCopy p {
+    transition: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .trustAmbient {
+    inset: -2rem 0 auto;
+    height: 7rem;
+  }
+
+  .trustAmbient span {
+    width: 6rem;
+    height: 6rem;
+    filter: blur(32px);
+  }
+
+  .trustItem::before {
+    display: none;
+  }
+}
+
+/* ───────────── Small phones ───────────── */
+
+@media (max-width: 380px) {
+  .trustSection {
+    padding: 3.5rem 0 3.75rem;
+  }
+
+  .trustContent {
+    gap: 0.85rem;
+  }
+
+  .trustIcon {
+    width: 42px;
+    height: 42px;
+    font-size: 1rem;
+  }
+
+  .trustCopy h3 {
+    font-size: 1.2rem;
+  }
+
+  .trustCopy p {
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: 640px) {
+  .grid3 {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+}

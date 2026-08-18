@@ -1,0 +1,112 @@
+.section { background: var(--brand-white); }
+.heading { text-align: center; margin-bottom: 2.5rem; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.tile {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  cursor: pointer;
+  background: var(--brand-greige);
+  box-shadow: 0 0 0 rgba(26, 26, 26, 0);
+  transition: box-shadow 0.5s var(--ease-out);
+}
+
+.tile:hover {
+  box-shadow: 0 20px 40px -14px rgba(26, 26, 26, 0.28);
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.8s var(--ease-out);
+}
+
+.tile:hover .img { transform: scale(1.08); }
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15,10,10,0.65) 0%, transparent 55%);
+  transition: background 0.5s var(--ease-out);
+  pointer-events: none;
+}
+
+.tile:hover .overlay {
+  background: linear-gradient(to top, rgba(15,10,10,0.78) 0%, rgba(15,10,10,0.08) 65%, transparent 100%);
+}
+
+.caption {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  transition: transform 0.35s var(--ease-out);
+}
+
+.tile:hover .caption { transform: translateY(-6px); }
+
+.eyebrowSm {
+  display: block;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 0.3rem;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  font-style: italic;
+  color: white;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+  font-size: 0.75rem;
+  color: white;
+  padding-bottom: 2px;
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.5);
+  transform-origin: left;
+  transition: background 0.35s var(--ease-out);
+}
+
+.tile:hover .link::after {
+  background: white;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .img,
+  .caption,
+  .tile,
+  .overlay {
+    transition: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
+  .name { font-size: 1.1rem; }
+}

@@ -1,0 +1,36 @@
+.pageShell {
+  position: relative;
+  isolation: isolate;
+}
+
+/*
+ * Main page content.
+ *
+ * Keeping this above the footer gives the footer a clean visual
+ * separation without creating an artificial scroll container.
+ */
+.contentWrap {
+  position: relative;
+  z-index: 2;
+  background: var(--brand-white);
+}
+
+/*
+ * The footer is the final document element.
+ *
+ * No fixed height.
+ * No sticky positioning.
+ * No artificial viewport-sized wrapper.
+ *
+ * This is important because Lenis and native mobile scrolling
+ * should both see the real document height.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .pageShell {
+    isolation: auto;
+  }
+
+  .contentWrap {
+    z-index: auto;
+  }
+}

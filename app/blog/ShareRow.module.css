@@ -1,0 +1,70 @@
+.shareRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--border-light);
+  max-width: 720px;
+}
+
+.shareLabel {
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.shareIcons {
+  display: flex;
+  gap: 1rem;
+}
+
+.shareIcons a,
+.copyBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  color: var(--brand-black);
+  font-size: 1rem;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.copyBtn {
+  position: relative;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.shareIcons a:hover,
+.copyBtn:hover {
+  background: var(--brand-black);
+  color: var(--brand-white);
+  border-color: var(--brand-black);
+}
+
+.copiedLabel {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--brand-black);
+  color: var(--brand-white);
+  font-size: 0.7rem;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  padding: 0.3rem 0.6rem;
+  border-radius: 3px;
+}
+
+@media (max-width: 640px) {
+  .shareRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}

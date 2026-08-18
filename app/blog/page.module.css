@@ -1,0 +1,338 @@
+/* ── Page wrapper ── */
+.page {
+  background: var(--brand-white);
+  min-height: 100vh;
+}
+
+/* ── Page header ── */
+.pageHeader {
+  text-align: center;
+  padding: 4rem 1.5rem 3rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.eyebrow {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--brand-sage);
+}
+
+.heading {
+  color: var(--brand-black);
+}
+
+/* ══════════════════════════════
+   HERO FEATURED POST
+══════════════════════════════ */
+.heroSection {
+  padding: 0;
+}
+
+.heroCard {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 72vh;
+  min-height: 480px;
+  max-height: 720px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.heroImgWrap {
+  position: absolute;
+  inset: 0;
+}
+
+.heroImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease-out);
+}
+
+.heroCard:hover .heroImg {
+  transform: scale(1.04);
+}
+
+/* Gradient scrim — bottom heavy for text legibility */
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(15, 10, 10, 0.82) 0%,
+    rgba(15, 10, 10, 0.35) 45%,
+    transparent 75%
+  );
+  pointer-events: none;
+}
+
+.heroContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2.5rem 3rem;
+  max-width: 860px;
+}
+
+.heroCategory {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--brand-rose);
+  margin-bottom: 0.75rem;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.8rem);
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: white;
+  margin-bottom: 1.25rem;
+  text-wrap: balance;
+}
+
+.heroMeta {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.heroDate {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.heroRead {
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  padding-bottom: 1px;
+  transition: border-color 0.2s, letter-spacing 0.3s var(--ease-out);
+}
+
+.heroCard:hover .heroRead {
+  border-color: white;
+  letter-spacing: 0.1em;
+}
+
+/* ══════════════════════════════
+   GRID SECTION
+══════════════════════════════ */
+.gridSection {
+  padding: 4rem 0 5rem;
+  background: var(--brand-white);
+}
+
+.gridInner {
+  max-width: var(--max-w-md);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+/* ── Blog card ── */
+.card {
+  display: block;
+  background: var(--brand-white);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.09);
+}
+
+.cardImgWrap {
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+
+.cardImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.55s var(--ease-out);
+}
+
+.card:hover .cardImg {
+  transform: scale(1.05);
+}
+
+.cardBody {
+  padding: 1.5rem;
+}
+
+.cardCategory {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--brand-rose);
+  margin-bottom: 0.6rem;
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--brand-black);
+  margin-bottom: 1.25rem;
+  text-wrap: balance;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cardDate {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.cardArrow {
+  font-size: 1rem;
+  color: var(--text-muted);
+  transition: transform 0.25s var(--ease-out), color 0.2s;
+}
+
+.card:hover .cardArrow {
+  transform: translateX(4px);
+  color: var(--brand-rose);
+}
+
+/* ── Editorial quote card ── */
+.quoteCard {
+  background: var(--brand-linen);
+  border: 1px solid var(--border-light);
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.quoteText {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--brand-black);
+}
+
+.quoteAuthor {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.quoteBtn {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+/* ══════════════════════════════
+   NEWSLETTER STRIP
+══════════════════════════════ */
+.newsletterStrip {
+  background: var(--brand-black);
+  padding: 3.5rem 0;
+}
+
+.stripInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.stripEyebrow {
+  display: block;
+  color: var(--brand-sage);
+  margin-bottom: 0.4rem;
+}
+
+.stripHeading {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  color: var(--brand-white);
+}
+
+.stripForm {
+  display: flex;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.stripInput {
+  width: 260px;
+  padding: 0.8rem 1rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-right: none;
+  color: white;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.stripInput::placeholder { color: rgba(255, 255, 255, 0.35); }
+.stripInput:focus { border-color: rgba(255, 255, 255, 0.45); }
+
+.stripBtn { border-radius: 0; flex-shrink: 0; }
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media (max-width: 768px) {
+  .heroContent { padding: 2rem 1.5rem; }
+
+  .heroTitle { font-size: clamp(1.6rem, 6vw, 2.4rem); }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .quoteCard { padding: 2rem 1.5rem; }
+
+  .stripInner { flex-direction: column; align-items: flex-start; }
+
+  .stripForm { width: 100%; }
+
+  .stripInput { flex: 1; width: auto; }
+}
+
+@media (max-width: 480px) {
+  .heroCard {
+    height: 60vh;
+    min-height: 360px;
+  }
+
+  .pageHeader { padding: 3rem 1rem 2rem; }
+}
