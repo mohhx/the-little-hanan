@@ -1,14 +1,14 @@
-import Hero from '../components/sections/Hero';
-import Categories from '../components/sections/Categories';
-import ProductGrid from '../components/sections/ProductGrid';
-import WhimsyTeaser from '../components/sections/WhimsyTeaser';
-import FAQSection from '../components/sections/FAQSection';
+import Hero from '../../components/sections/Hero';
+import Categories from '../../components/sections/Categories';
+import ProductGrid from '../../components/sections/ProductGrid';
+import WhimsyTeaser from '../../components/sections/WhimsyTeaser';
+import FAQSection from '../../components/sections/FAQSection';
 import {
   DealsSection,
   TrustBanner,
   BlogSection,
-} from '../components/sections/Sections';
-import { getProducts, getCategories, getBlogPosts, getDealsReelProducts, getWhimsyProducts } from '../lib/products';
+} from '../../components/sections/Sections';
+import { getProducts, getCategories, getBlogPosts, getDealsReelProducts, getWhimsyProducts } from '../../lib/products';
 
 export default async function HomePage() {
   const [products, categories, blogPosts, dealsReelProducts, whimsyProducts] = await Promise.all([
